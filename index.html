@@ -50,14 +50,14 @@
         <div class="capsule">
           <h1><span class="hero-word">Food</span><span class="hero-word">Trailers</span></h1>
           <div class="hero-trailers">
-        <img src="assets/img/trailer-8x10-sm.webp" alt="" data-len="10" data-label="8 × 10 FT" width="900" height="620" fetchpriority="high">
-        <img src="assets/img/trailer-8x12-sm.webp" alt="" data-len="12" data-label="8 × 12 FT" width="900" height="620" loading="lazy">
-        <img src="assets/img/trailer-8x14-sm.webp" alt="" data-len="14" data-label="8 × 14 FT" width="900" height="620" loading="lazy">
+        <img src="assets/img/trailer-8x14-sm.webp" alt="" data-len="14" data-label="8 × 14 FT" width="900" height="620" fetchpriority="high">
         <img src="assets/img/trailer-8x16-sm.webp" alt="" data-len="16" data-label="8 × 16 FT" width="900" height="620" loading="lazy">
         <img src="assets/img/trailer-8x20-sm.webp" alt="" data-len="20" data-label="8 × 20 FT" width="900" height="620" loading="lazy">
+        <img src="assets/img/trailer-8x10-sm.webp" alt="" data-len="10" data-label="8 × 10 FT" width="900" height="620" loading="lazy">
+        <img src="assets/img/trailer-8x12-sm.webp" alt="" data-len="12" data-label="8 × 12 FT" width="900" height="620" loading="lazy">
           </div>
           <div class="hero-readout" aria-hidden="true">
-            <span class="size mono">8 × 10 FT</span>
+            <span class="size mono">8 × 14 FT</span>
             <div class="ruler-mini"><span></span></div>
           </div>
         </div>
@@ -229,7 +229,7 @@
           <p class="lede">Our mission is to bring your culinary vision to life with trailers built to meet your specific business needs. Whether you’re starting a food trailer business or expanding your fleet, our experienced team is here to guide you every step of the way.</p>
         </div>
         <div class="apart">
-          <h3>What sets us apart</h3>
+          <h3 class="h3">What sets us apart</h3>
           <ul>
             <li><strong>Transparency</strong><p>Customers are welcome to visit our facilities and see how their trailer is being built.</p></li>
             <li><strong>Customized support</strong><p>Customers help design their trailer layout to fit their exact needs.</p></li>
@@ -246,20 +246,12 @@
 
     <section class="section-tight" id="work" aria-labelledby="work-h" style="padding-inline: var(--gutter)">
       <div class="work-head">
-        <div>
-          <h2 class="display" id="work-h">Our recent <em>work</em></h2>
-          <p class="lede">Take a look at our latest projects and see how we bring culinary visions to life with our customizable food trucks.</p>
-        </div>
-        <div class="rail-controls">
-          <button class="btn" type="button" data-rail="-1" aria-label="Previous"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
-          <button class="btn" type="button" data-rail="1" aria-label="Next"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
-        </div>
+        <h2 class="display" id="work-h">Our recent <em>work</em></h2>
+        <p class="lede">Take a look at our latest projects and see how we bring culinary visions to life with our customizable food trucks.</p>
       </div>
-      <div class="work-rail">
-        <figure><img src="assets/img/gallery-2.webp" alt="Hand holding La Patrona keychain in front of a new trailer" loading="lazy"></figure>
-        <figure><img src="assets/img/work-1.webp" alt="Customers with their black La Patrona food trailer" loading="lazy"><figcaption>Delivered build</figcaption></figure>
-        <figure><img src="assets/img/gallery-1.webp" alt="La Patrona food trailers collage" loading="lazy"></figure>
-        <figure><img src="assets/img/work-2.webp" alt="Customers receiving their black food trailer" loading="lazy"><figcaption>Delivered build</figcaption></figure>
+      <div class="work-grid">
+        <figure><img src="assets/img/work-1.webp" alt="Customers with their black La Patrona food trailer" loading="lazy" width="653" height="463"><figcaption>Delivered build</figcaption></figure>
+        <figure><img src="assets/img/work-2.webp" alt="Customers receiving their black food trailer" loading="lazy" width="550" height="393"><figcaption>Delivered build</figcaption></figure>
       </div>
     </section>
 
@@ -267,14 +259,20 @@
       <div class="reviews">
         <div>
           <h2 class="display" id="rev-h">What our customers <em>say</em></h2>
-          <p class="lede">Reviews left by La Patrona customers on Facebook.</p>
+          <p class="lede">Recommendations left by La Patrona customers on Facebook, shown as written.</p>
           <div class="btn-pair">
             <a class="btn btn-lg" href="https://www.facebook.com/LaPatronaTrailersOFICIAL/" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-7.5h2.6l.4-3H14V8.6c0-.9.3-1.5 1.6-1.5H17V4.4a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.3H8.3v3H11V21"/></svg> See more on Facebook</a>
           </div>
         </div>
-        <div class="review-shots">
-          <figure><img src="assets/img/review-1.webp" alt="Customer review on Facebook" loading="lazy" width="808" height="217"></figure>
-          <figure><img src="assets/img/review-2.webp" alt="Customer review on Facebook" loading="lazy" width="808" height="213"></figure>
+        <div class="review-list">
+          <figure class="review" lang="en">
+            <blockquote><p>Thank you La Patrona Trailers for my first food truck! We loved working with Nathaly, Clau and Edwin. They are experienced in making food trucks and we definitely recommend!</p></blockquote>
+            <figcaption><strong>Canee Obafial</strong><span>Recommends La Patrona Trailers · Facebook · June 28</span></figcaption>
+          </figure>
+          <figure class="review" lang="es">
+            <blockquote><p>Excelente trabajo y atención. Te sugiero que consideres LA PATRONA Es un lugar genial para emprender tu proyecto de trabajo el equipo es muy profesional y el ambiente es muy agradable. También ofrecen buenas oportunidades para crecer con tu propia compañía.</p></blockquote>
+            <figcaption><strong>Yunaisa Ramirez</strong><span>Recommends La Patrona Trailers · Facebook · June 29</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -282,7 +280,7 @@
     <section class="section" id="founder" aria-labelledby="founder-h" style="padding-top:0">
       <div class="founder">
         <figure class="founder-photo">
-          <div class="frame"><img src="assets/img/nathaly.webp" alt="Nathaly Lastra, founder and CEO of La Patrona Trailers" loading="lazy" width="683" height="1024"></div>
+          <div class="stage"><img src="assets/img/nathaly-cutout.webp" alt="Nathaly Lastra, founder and CEO of La Patrona Trailers" loading="lazy" width="495" height="1271"></div>
           <figcaption><strong>Nathaly Lastra</strong><span>CEO, La Patrona Trailers</span></figcaption>
         </figure>
         <div class="founder-copy">
@@ -300,6 +298,7 @@
 
     <section class="cta-band" aria-labelledby="cta-h">
       <h2 class="display" id="cta-h">Let’s build your <em>food trailer.</em></h2>
+      <p class="finance mono">Financing up to $30K</p>
       <div class="btn-pair">
         <a class="btn btn-gold btn-lg" href="https://wa.link/mzfoe2" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.6Z"/><path d="M9 9.2c.2 1.9 1.9 4.4 4.6 5.3l1.2-1.2 1.7.8-.4 1.6c-3.6.4-7.4-3.1-7.9-6.6l1.5-.6.9 1.6Z"/></svg> Get a quote on WhatsApp</a>
         <a class="btn btn-gold btn-lg btn-square" href="https://wa.link/mzfoe2" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8.5 7H17v8.5"/></svg></a>

@@ -34,6 +34,13 @@ def wa(text):
     return f"https://wa.me/{PHONE}?text={quote(text)}"
 
 
+REVIEWS = [  # verbatim from the client's Facebook recommendations (screenshots on the live site)
+    ("Canee Obafial", {"en": "June 28", "es": "28 de junio"}, "en",
+     "Thank you La Patrona Trailers for my first food truck! We loved working with Nathaly, Clau and Edwin. They are experienced in making food trucks and we definitely recommend!"),
+    ("Yunaisa Ramirez", {"en": "June 29", "es": "29 de junio"}, "es",
+     "Excelente trabajo y atención. Te sugiero que consideres LA PATRONA Es un lugar genial para emprender tu proyecto de trabajo el equipo es muy profesional y el ambiente es muy agradable. También ofrecen buenas oportunidades para crecer con tu propia compañía."),
+]
+
 SIZES = [  # (key, length ft, crew min, crew max)
     ("8x10", 10, 1, 2),
     ("8x12", 12, 2, 2),
@@ -89,7 +96,9 @@ T = {
         "prev": "Previous", "next": "Next", "delivered": "Delivered build",
         "work_alts": ["Customers with their black La Patrona food trailer", "Customers receiving their black food trailer", "La Patrona food trailers collage", "Hand holding La Patrona keychain in front of a new trailer"],
         "rev_h": "What our customers <em>say</em>",
-        "rev_p": "Reviews left by La Patrona customers on Facebook.",
+        "rev_p": "Recommendations left by La Patrona customers on Facebook, shown as written.",
+        "rev_meta": "Recommends La Patrona Trailers · Facebook · {date}",
+        "finance": "Financing up to $30K",
         "rev_btn": "See more on Facebook",
         "rev_alts": ["Customer review on Facebook", "Customer review on Facebook"],
         "founder_role": "CEO, La Patrona Trailers",
@@ -171,7 +180,9 @@ T = {
         "prev": "Anterior", "next": "Siguiente", "delivered": "Trailer entregado",
         "work_alts": ["Clientes con su food trailer negro de La Patrona", "Clientes recibiendo su food trailer negro", "Collage de food trailers de La Patrona", "Mano con llavero de La Patrona frente a un trailer nuevo"],
         "rev_h": "Lo que dicen nuestros <em>clientes</em>",
-        "rev_p": "Reseñas que nuestros clientes dejaron en Facebook.",
+        "rev_p": "Recomendaciones que nuestros clientes dejaron en Facebook, tal como las escribieron.",
+        "rev_meta": "Recomienda La Patrona Trailers · Facebook · {date}",
+        "finance": "Financiamiento de hasta $30K",
         "rev_btn": "Ver más en Facebook",
         "rev_alts": ["Reseña de un cliente en Facebook", "Reseña de un cliente en Facebook"],
         "founder_role": "CEO, La Patrona Trailers",
@@ -224,9 +235,10 @@ def page(t):
     accept_privacy = "He leído y acepto la" if L == "es" else t["accept"]
     label = lambda k: k.replace("x", " × ")
 
+    hero_order = [SIZES[i] for i in (2, 3, 4, 0, 1)]  # open on the 8x14 studio shot
     hero_imgs = "\n".join(
         f'        <img src="{b}assets/img/trailer-{k}-sm.webp" alt="" data-len="{n}" data-label="{label(k)} {t["ft"].upper()}" width="900" height="620"{" fetchpriority=\"high\"" if i == 0 else " loading=\"lazy\""}>'
-        for i, (k, n, _, _) in enumerate(SIZES)
+        for i, (k, n, _, _) in enumerate(hero_order)
     )
 
     tabs = "\n".join(
@@ -265,11 +277,16 @@ def page(t):
     panels = "\n".join(panels)
 
     apart = "\n".join(f'            <li><strong>{h}</strong><p>{p}</p></li>' for h, p in t["apart"])
-    work = [("gallery-2", 0, False), ("work-1", 0, True), ("gallery-1", 0, False), ("work-2", 0, True)]
-    alts = {"work-1": t["work_alts"][0], "work-2": t["work_alts"][1], "gallery-1": t["work_alts"][2], "gallery-2": t["work_alts"][3]}
     work_html = "\n".join(
-        f'        <figure><img src="{b}assets/img/{w}.webp" alt="{alts[w]}" loading="lazy">{f"<figcaption>{t["delivered"]}</figcaption>" if cap else ""}</figure>'
-        for w, _, cap in work
+        f'        <figure><img src="{b}assets/img/{w}.webp" alt="{t["work_alts"][i]}" loading="lazy" width="{wd}" height="{ht}"><figcaption>{t["delivered"]}</figcaption></figure>'
+        for i, (w, wd, ht) in enumerate([("work-1", 653, 463), ("work-2", 550, 393)])
+    )
+    reviews_html = "\n".join(
+        f'''          <figure class="review" lang="{lg}">
+            <blockquote><p>{txt}</p></blockquote>
+            <figcaption><strong>{name}</strong><span>{t["rev_meta"].format(date=date[L])}</span></figcaption>
+          </figure>'''
+        for name, date, lg, txt in REVIEWS
     )
     founder_ps = "\n".join(f'          <p class="lede">{p}</p>' for p in t["founder_ps"])
     legal = "\n".join(f'            <li><a href="{t["legal_base"]}{u}">{n}</a></li>' for n, u in t["legal"])
@@ -329,7 +346,7 @@ def page(t):
 {hero_imgs}
           </div>
           <div class="hero-readout" aria-hidden="true">
-            <span class="size mono">8 × 10 {t['ft'].upper()}</span>
+            <span class="size mono">8 × 14 {t['ft'].upper()}</span>
             <div class="ruler-mini"><span></span></div>
           </div>
         </div>
@@ -383,7 +400,7 @@ def page(t):
           <p class="lede">{t['about_p2']}</p>
         </div>
         <div class="apart">
-          <h3>{t['apart_h']}</h3>
+          <h3 class="h3">{t['apart_h']}</h3>
           <ul>
 {apart}
           </ul>
@@ -398,16 +415,10 @@ def page(t):
 
     <section class="section-tight" id="work" aria-labelledby="work-h" style="padding-inline: var(--gutter)">
       <div class="work-head">
-        <div>
-          <h2 class="display" id="work-h">{t['work_h']}</h2>
-          <p class="lede">{t['work_p']}</p>
-        </div>
-        <div class="rail-controls">
-          <button class="btn" type="button" data-rail="-1" aria-label="{t['prev']}">{icon('left')}</button>
-          <button class="btn" type="button" data-rail="1" aria-label="{t['next']}">{icon('right')}</button>
-        </div>
+        <h2 class="display" id="work-h">{t['work_h']}</h2>
+        <p class="lede">{t['work_p']}</p>
       </div>
-      <div class="work-rail">
+      <div class="work-grid">
 {work_html}
       </div>
     </section>
@@ -421,9 +432,8 @@ def page(t):
             <a class="btn btn-lg" href="{FACEBOOK}" target="_blank" rel="noopener">{icon('fb')} {t['rev_btn']}</a>
           </div>
         </div>
-        <div class="review-shots">
-          <figure><img src="{b}assets/img/review-1.webp" alt="{t['rev_alts'][0]}" loading="lazy" width="808" height="217"></figure>
-          <figure><img src="{b}assets/img/review-2.webp" alt="{t['rev_alts'][1]}" loading="lazy" width="808" height="213"></figure>
+        <div class="review-list">
+{reviews_html}
         </div>
       </div>
     </section>
@@ -431,7 +441,7 @@ def page(t):
     <section class="section" id="founder" aria-labelledby="founder-h" style="padding-top:0">
       <div class="founder">
         <figure class="founder-photo">
-          <div class="frame"><img src="{b}assets/img/nathaly.webp" alt="{t['founder_alt']}" loading="lazy" width="683" height="1024"></div>
+          <div class="stage"><img src="{b}assets/img/nathaly-cutout.webp" alt="{t['founder_alt']}" loading="lazy" width="495" height="1271"></div>
           <figcaption><strong>Nathaly Lastra</strong><span>{t['founder_role']}</span></figcaption>
         </figure>
         <div class="founder-copy">
@@ -447,6 +457,7 @@ def page(t):
 
     <section class="cta-band" aria-labelledby="cta-h">
       <h2 class="display" id="cta-h">{t['cta_h']}</h2>
+      <p class="finance mono">{t['finance']}</p>
       <div class="btn-pair">
         <a class="btn btn-gold btn-lg" href="{t['quote_url']}" target="_blank" rel="noopener">{icon('chat')} {t['cta_btn']}</a>
         <a class="btn btn-gold btn-lg btn-square" href="{t['quote_url']}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">{icon('arrow')}</a>

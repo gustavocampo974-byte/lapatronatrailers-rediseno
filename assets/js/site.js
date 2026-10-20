@@ -13,6 +13,9 @@
     header.classList.toggle('is-scrolled', window.scrollY > 24);
     if (bar && hero) bar.classList.toggle('is-on', window.scrollY > hero.offsetHeight * 0.7);
   };
+  // Hero trailer rises and grows slightly as the hero scrolls away
+  const heroTravel = () => { if (hero) hero.style.setProperty('--hp', Math.min(1, window.scrollY / hero.offsetHeight).toFixed(3)); };
+  if (!reduce) window.addEventListener('scroll', heroTravel, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
@@ -111,12 +114,6 @@
     light();
   }
 
-  // Recent work rail buttons
-  const rail = document.querySelector('.work-rail');
-  document.querySelectorAll('[data-rail]').forEach((b) => b.addEventListener('click', () => {
-    const step = rail.firstElementChild.getBoundingClientRect().width + 12;
-    rail.scrollBy({ left: Number(b.dataset.rail) * step, behavior: reduce ? 'auto' : 'smooth' });
-  }));
 
   // Contact form: validate, then hand the request to WhatsApp (static preview has no backend)
   const form = document.querySelector('.form');
