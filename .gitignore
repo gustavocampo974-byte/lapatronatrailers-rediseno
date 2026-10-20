@@ -1,0 +1,11 @@
+.impeccable/ref/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/config.local.json
+assets/img/*.png
+!assets/img/favicon.png
+assets/img/*.jpg
+tools/__pycache__/
+.impeccable/
+PRODUCT.md
+DESIGN.md
