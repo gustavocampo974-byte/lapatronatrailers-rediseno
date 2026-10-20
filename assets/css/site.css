@@ -164,13 +164,13 @@ html { scrollbar-color: #3a3833 var(--ink); }
 .js .size-panel { padding-bottom: 0; }
 .size-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 48px); }
 .size-tabs button {
-  font: 500 15px/1 var(--mono); color: var(--bone-2);
+  font: 500 15px/1 var(--mono); color: var(--gold);
   min-height: 46px; padding: 0 20px; border-radius: 999px;
-  border: 1px solid var(--line-strong); background: transparent; cursor: pointer;
+  border: 1px solid rgba(242, 179, 61, 0.55); background: transparent; cursor: pointer;
   transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
 }
-.size-tabs button:hover { border-color: var(--bone); color: var(--bone); }
-.size-tabs button[aria-selected="true"] { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+.size-tabs button:hover { border-color: var(--gold); background: rgba(242, 179, 61, 0.12); }
+.size-tabs button[aria-selected="true"] { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); font-weight: 600; }
 .size-tabs button.custom { font-family: var(--sans); }
 .size-panels { position: relative; }
 .size-panel {
