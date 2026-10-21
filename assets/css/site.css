@@ -304,7 +304,16 @@ html { scrollbar-color: #3a3833 var(--ink); }
 
 /* ---------- CTA band ---------- */
 .cta-band { padding: clamp(80px, 11vw, 170px) var(--gutter); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; display: grid; justify-items: center; gap: 30px; position: relative; overflow: hidden; }
-.finance { color: var(--gold); font-size: 15px; }
+.price { color: var(--gold); font-size: 15px; }
+.price-note { font-size: 13px; color: var(--dim); margin-top: -8px; }
+.finance-frame {
+  border: 1px solid var(--line-strong); border-radius: var(--radius-cap);
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(32px, 5vw, 96px);
+  padding: clamp(40px, 6vw, 96px) clamp(24px, 5vw, 96px);
+}
+.finance-figure { color: var(--bone); font-weight: 300; font-size: clamp(96px, 15vw, 240px); line-height: 0.85; letter-spacing: -0.05em; display: grid; gap: 18px; }
+.finance-figure span { color: var(--gold); font-size: 15px; letter-spacing: 0; line-height: 1; }
+.finance-copy { display: grid; gap: 22px; }
 .cta-band .display { max-width: 16ch; }
 
 /* ---------- Contact ---------- */
@@ -373,7 +382,7 @@ html { scrollbar-color: #3a3833 var(--ink); }
 }
 @media (max-width: 860px) {
   .size-panel { grid-template-columns: 1fr; }
-  .custom-frame { grid-template-columns: 1fr; border-radius: 40px; }
+  .custom-frame, .finance-frame { grid-template-columns: 1fr; border-radius: 40px; }
   .custom-art { margin: 0 -8% -10%; }
   .visit { grid-template-columns: auto 1fr; border-radius: 28px; padding: 22px; }
   .visit .btn { grid-column: 1 / -1; }

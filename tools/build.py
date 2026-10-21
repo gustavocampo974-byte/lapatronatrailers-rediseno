@@ -41,6 +41,9 @@ REVIEWS = [  # verbatim from the client's Facebook recommendations (screenshots 
      "Excelente trabajo y atención. Te sugiero que consideres LA PATRONA Es un lugar genial para emprender tu proyecto de trabajo el equipo es muy profesional y el ambiente es muy agradable. También ofrecen buenas oportunidades para crecer con tu propia compañía."),
 ]
 
+# EXAMPLE starting prices (hypothetical, shown with a visible note) until the client confirms real ones
+PRICES = {"8x10": 12000, "8x12": 15000, "8x14": 19000, "8x16": 24000, "8x20": 32000}
+
 SIZES = [  # (key, length ft, crew min, crew max)
     ("8x10", 10, 1, 2),
     ("8x12", 12, 2, 2),
@@ -98,7 +101,10 @@ T = {
         "rev_h": "What our customers <em>say</em>",
         "rev_p": "Recommendations left by La Patrona customers on Facebook, shown as written.",
         "rev_meta": "Recommends La Patrona Trailers · Facebook · {date}",
-        "finance": "Financing up to $30K",
+        "price": "Starting at", "price_note": "* Example prices, pending confirmation.",
+        "fin_upto": "Financing up to", "fin_h": "Make your dream affordable.",
+        "fin_p": "You don’t have to pay it all at once. Financing up to $30K is available. Ask about the options when you request your quote.",
+        "fin_btn": "Ask about financing", "wa_fin": "Hi! I'd like information about financing for a food trailer.",
         "rev_btn": "See more on Facebook",
         "rev_alts": ["Customer review on Facebook", "Customer review on Facebook"],
         "founder_role": "CEO, La Patrona Trailers",
@@ -182,7 +188,10 @@ T = {
         "rev_h": "Lo que dicen nuestros <em>clientes</em>",
         "rev_p": "Recomendaciones que nuestros clientes dejaron en Facebook, tal como las escribieron.",
         "rev_meta": "Recomienda La Patrona Trailers · Facebook · {date}",
-        "finance": "Financiamiento de hasta $30K",
+        "price": "Desde", "price_note": "* Precios de ejemplo, por confirmar.",
+        "fin_upto": "Financiamiento de hasta", "fin_h": "Haz tu sueño alcanzable.",
+        "fin_p": "No tienes que pagarlo todo de una vez. Hay financiamiento de hasta $30K. Pregunta por las opciones cuando pidas tu cotización.",
+        "fin_btn": "Preguntar por financiamiento", "wa_fin": "¡Hola! Quisiera información sobre el financiamiento de un food trailer.",
         "rev_btn": "Ver más en Facebook",
         "rev_alts": ["Reseña de un cliente en Facebook", "Reseña de un cliente en Facebook"],
         "founder_role": "CEO, La Patrona Trailers",
@@ -267,10 +276,12 @@ def page(t):
           <dl class="spec">
             <dt>{t['dims']}</dt><dd class="mono">8 {t['ft']} × {n} {t['ft']}</dd>
             <dt>{t['crew']}</dt><dd>{crew(lo, hi)}<span>{cap}</span></dd>
+            <dt>{t['price']}</dt><dd><span class="price mono">${PRICES[k]:,}*</span></dd>
           </dl>
+          <p class="price-note">{t['price_note']}</p>
           <div class="btn-pair">
-            <a class="btn btn-gold btn-lg" href="{wa(t['wa_size'].format(s=s.replace(' ', '')))}" target="_blank" rel="noopener">{t['quote_size'].format(s=s.replace(' ', ''))}</a>
-            <a class="btn btn-gold btn-lg btn-square" href="{wa(t['wa_size'].format(s=s.replace(' ', '')))}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">{icon('arrow')}</a>
+            <a class="btn btn-gold btn-lg" href="{wa(t['wa_size'].format(s=s.replace(' ', '')))}" target="_blank" rel="noopener" data-track="quote_{k}">{t['quote_size'].format(s=s.replace(' ', ''))}</a>
+            <a class="btn btn-gold btn-lg btn-square" href="{wa(t['wa_size'].format(s=s.replace(' ', '')))}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1" data-track="quote_{k}">{icon('arrow')}</a>
           </div>
         </div>
       </article>''')
@@ -455,9 +466,22 @@ def page(t):
       </div>
     </section>
 
+    <section class="section-tight finance-band" id="financing" aria-labelledby="fin-h" style="padding-inline: var(--gutter)">
+      <div class="finance-frame">
+        <p class="finance-figure" aria-hidden="true"><span class="mono">{t['fin_upto']}</span>$30K</p>
+        <div class="finance-copy">
+          <h2 class="display" id="fin-h">{t['fin_h']}</h2>
+          <p class="lede">{t['fin_p']}</p>
+          <div class="btn-pair">
+            <a class="btn btn-gold btn-lg" href="{wa(t['wa_fin'])}" target="_blank" rel="noopener" data-track="financing">{t['fin_btn']}</a>
+            <a class="btn btn-gold btn-lg btn-square" href="{wa(t['wa_fin'])}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1" data-track="financing">{icon('arrow')}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cta-band" aria-labelledby="cta-h">
       <h2 class="display" id="cta-h">{t['cta_h']}</h2>
-      <p class="finance mono">{t['finance']}</p>
       <div class="btn-pair">
         <a class="btn btn-gold btn-lg" href="{t['quote_url']}" target="_blank" rel="noopener">{icon('chat')} {t['cta_btn']}</a>
         <a class="btn btn-gold btn-lg btn-square" href="{t['quote_url']}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">{icon('arrow')}</a>

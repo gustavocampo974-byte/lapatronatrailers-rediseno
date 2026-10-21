@@ -115,6 +115,18 @@
   }
 
 
+  // Quote clicks: one event per button (e.g. quote_8x10) for GA4/GTM once analytics is installed on the live domain
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href*="wa.me"], a[href*="wa.link"], a[href^="tel:"]');
+    if (!a) return;
+    const section = a.closest('section, header, footer, .quote-bar');
+    const where = section ? (section.id || section.className.split(' ')[0]) : 'page';
+    const label = a.dataset.track || (a.href.startsWith('tel:') ? 'call_' : 'whatsapp_') + where;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'quote_click', quote_label: label, page_lang: document.documentElement.lang });
+    if (typeof window.gtag === 'function') window.gtag('event', 'quote_click', { quote_label: label });
+  });
+
   // Contact form: validate, then hand the request to WhatsApp (static preview has no backend)
   const form = document.querySelector('.form');
   if (form) {
