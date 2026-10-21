@@ -62,6 +62,7 @@ T = {
         "contact": "Contact", "quote": "Get a quote", "call": "Call La Patrona",
         "quote_url": "https://wa.link/mzfoe2",
         "hero_words": ("Food", "Trailers"),
+        "h1": "Custom Food Trailers in Orlando, FL", "hero_pre": "Custom", "hero_post": "in Orlando, FL",
         "hero_l1": "Customizable food trailers, built in Orlando.",
         "hero_l2": "Quality and personalization are our priorities. Visit our facility and watch your trailer being built.",
         "scroll": "Sizes 8×10 to 8×20 ft",
@@ -149,6 +150,7 @@ T = {
         "contact": "Contacto", "quote": "Cotizar", "call": "Llamar a La Patrona",
         "quote_url": wa("¡Hola! Quisiera recibir más información sobre los food trailers."),
         "hero_words": ("Food", "Trailers"),
+        "h1": "Food Trailers a tu medida en Orlando, FL", "hero_pre": "A tu medida", "hero_post": "en Orlando, FL",
         "hero_l1": "Food trailers personalizados, construidos en Orlando.",
         "hero_l2": "La calidad y la personalización son nuestras prioridades. Visita nuestras instalaciones y mira cómo se construye tu trailer.",
         "scroll": "Tamaños de 8×10 a 8×20 pies",
@@ -352,7 +354,11 @@ def page(t):
     <section class="hero">
       <div class="hero-stage">
         <div class="capsule">
-          <h1><span class="hero-word">{t['hero_words'][0]}</span><span class="hero-word">{t['hero_words'][1]}</span></h1>
+          <h1>
+            <span class="sr-only">{t['h1']}</span>
+            <span class="hero-word hero-left" aria-hidden="true"><small>{t['hero_pre']}</small>{t['hero_words'][0]}</span>
+            <span class="hero-word hero-right" aria-hidden="true">{t['hero_words'][1]}<small>{t['hero_post']}</small></span>
+          </h1>
           <div class="hero-trailers">
 {hero_imgs}
           </div>
