@@ -323,8 +323,8 @@ def page(t):
         <span>La Patrona<br>Trailers</span>
       </a>
       <nav class="lang" aria-label="Language">
-        <a href="{(b or './') if L == 'en' else '../'}" hreflang="en" lang="en" aria-current="{'true' if L == 'en' else 'false'}">English</a>
-        <a href="{b + 'es/' if L == 'en' else './'}" hreflang="es" lang="es" aria-current="{'true' if L == 'es' else 'false'}">Español</a>
+        <a href="{'./' if L == 'en' else '../'}" hreflang="en" lang="en" aria-current="{'true' if L == 'en' else 'false'}">English</a>
+        <a href="{'es/' if L == 'en' else './'}" hreflang="es" lang="es" aria-current="{'true' if L == 'es' else 'false'}">Español</a>
       </nav>
     </div>
     <nav class="nav" aria-label="Main">
@@ -356,8 +356,8 @@ def page(t):
           <p>{t['hero_l1']}</p>
           <p>{t['hero_l2']}</p>
           <div class="btn-pair">
-            <a class="btn btn-gold btn-lg" href="{t.get('hero_quote_url', t['quote_url'])}" target="_blank" rel="noopener">{t.get('hero_quote', t['quote'])}</a>
-            <a class="btn btn-gold btn-lg btn-square" href="{t.get('hero_quote_url', t['quote_url'])}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">{icon('arrow')}</a>
+            <a class="btn btn-gold btn-lg" href="{t['quote_url']}" target="_blank" rel="noopener">{t['quote']}</a>
+            <a class="btn btn-gold btn-lg btn-square" href="{t['quote_url']}" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">{icon('arrow')}</a>
           </div>
         </div>
         <a class="scroll-cue" href="#trailers"><span class="dot"></span>{t['scroll']}</a>
@@ -539,23 +539,8 @@ def page(t):
 '''
 
 
-# Prospect version: same page, hero addressed to Pearle Hospitality (pearlehospitality.ca)
-T["pearle"] = {
-    **T["en"],
-    "base": "../",
-    "title": "La Patrona Trailers for Pearle Hospitality | Custom Food Trailers",
-    "desc": "Custom food trailers designed with Pearle Hospitality's team for its venues, events and properties.",
-    "hero_l1": "Custom food trailers for Pearle Hospitality.",
-    "hero_l2": "A mobile kitchen designed with your team for events at the Mills, the golf club, the farm and every property in between.",
-    "hero_quote": "Request a proposal",
-    "hero_quote_url": wa("Hi! I'm with Pearle Hospitality and I'd like a proposal for custom food trailers."),
-    "scroll": "Prepared for Pearle Hospitality",
-}
-
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(page(T["en"]), encoding="utf-8")
     (ROOT / "es").mkdir(exist_ok=True)
     (ROOT / "es" / "index.html").write_text(page(T["es"]), encoding="utf-8")
-    (ROOT / "pearle").mkdir(exist_ok=True)
-    (ROOT / "pearle" / "index.html").write_text(page(T["pearle"]), encoding="utf-8")
     print("built index.html, es/index.html")
