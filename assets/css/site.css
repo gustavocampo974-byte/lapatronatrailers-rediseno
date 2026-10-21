@@ -114,7 +114,7 @@ html { scrollbar-color: #3a3833 var(--ink); }
   font-size: clamp(17px, 1.9vw, 34px); font-weight: 400; letter-spacing: -0.01em; line-height: 1;
   color: var(--bone-2); padding-inline: 0.1em;
 }
-.hero-trailers { position: absolute; left: 50%; top: 50%; width: min(36vw, 600px); aspect-ratio: 1.45; transform: translate(-50%, -56%); z-index: 1; pointer-events: none; }
+.hero-trailers { position: absolute; left: 50%; top: 50%; width: min(36vw, 600px, 62vh); aspect-ratio: 1.45; transform: translate(-50%, -56%); z-index: 1; pointer-events: none; }
 .hero-trailers { translate: 0 calc(var(--hp, 0) * -70px); scale: calc(1 + var(--hp, 0) * 0.08); }
 .hero-trailers::after, .size-visual .photo::after, .founder-photo .stage::after {
   content: ""; position: absolute; left: 8%; right: 8%; bottom: -2%; height: 14%; z-index: -1;
@@ -128,7 +128,7 @@ html { scrollbar-color: #3a3833 var(--ink); }
 .hero-trailers img.is-active { opacity: 1; transform: none; filter: drop-shadow(0 40px 40px rgba(0, 0, 0, 0.6)); }
 .hero-trailers img.is-leaving { opacity: 0; transform: translateX(-14%) scale(0.96); filter: blur(6px) brightness(0.7); }
 .hero-readout {
-  position: absolute; left: 50%; bottom: calc(-1 * clamp(56px, 9vh, 92px)); transform: translateX(-50%);
+  position: absolute; left: 50%; bottom: calc(-1 * clamp(64px, 12vh, 110px)); transform: translateX(-50%);
   display: grid; justify-items: center; gap: 10px; width: min(420px, 80vw); z-index: 3;
 }
 .hero-readout .size { color: var(--gold); font-size: 15px; }
