@@ -4,8 +4,11 @@ Run from the repo root:  python tools/build.py
 """
 from pathlib import Path
 from urllib.parse import quote
+import hashlib
 
 ROOT = Path(__file__).resolve().parent.parent
+# cache-busting: asset URLs change whenever their content changes
+VER = {n: hashlib.sha1((ROOT / "assets" / n).read_bytes()).hexdigest()[:8] for n in ("css/site.css", "js/site.js")}
 PHONE = "18632669575"
 FACEBOOK = "https://www.facebook.com/LaPatronaTrailersOFICIAL/"
 MAPS = "https://www.google.com/maps/search/?api=1&query=" + quote("2900 Titan Row, Suite 130, Orlando, FL 32817")
@@ -323,8 +326,8 @@ def page(t):
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="{b}assets/css/site.css">
-  <script defer src="{b}assets/js/site.js"></script>
+  <link rel="stylesheet" href="{b}assets/css/site.css?v={VER['css/site.css']}">
+  <script defer src="{b}assets/js/site.js?v={VER['js/site.js']}"></script>
 </head>
 <body>
   <a class="skip" href="#main">{t['skip']}</a>
