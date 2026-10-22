@@ -360,6 +360,18 @@ html { scrollbar-color: #3a3833 var(--ink); }
 .form-status { grid-column: 1 / -1; font-size: 14px; color: var(--gold); }
 .form-status:empty { display: none; }
 
+.social { display: flex; align-items: center; gap: 10px; }
+.social span { color: var(--dim); font-size: 14px; margin-right: 6px; }
+.social a {
+  width: 48px; height: 48px; display: grid; place-items: center; border-radius: 999px;
+  border: 1px solid rgba(242, 179, 61, 0.55); color: var(--gold);
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+.social a .icon { width: 22px; height: 22px; }
+.social a:hover { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+.reviews .btn .icon { color: var(--gold); width: 18px; height: 18px; }
+.reviews .btn:hover .icon { color: var(--ink); }
+
 /* ---------- Footer ---------- */
 .site-footer { padding: clamp(64px, 8vw, 110px) var(--gutter) 28px; }
 .footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 40px; padding-bottom: 56px; border-bottom: 1px solid var(--line); }
@@ -369,6 +381,8 @@ html { scrollbar-color: #3a3833 var(--ink); }
 .footer-grid a { text-decoration: none; }
 .footer-grid a:hover { color: var(--gold); }
 .footer-grid .hours span { display: block; color: var(--dim); }
+.footer-grid .social-links a { display: inline-flex; align-items: center; gap: 10px; }
+.footer-grid .social-links .icon { width: 18px; height: 18px; color: var(--gold); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 24px; font-size: 13px; color: var(--dim); flex-wrap: wrap; }
 .footer-bottom a { text-decoration: none; }
 .footer-bottom a:hover { color: var(--bone); }

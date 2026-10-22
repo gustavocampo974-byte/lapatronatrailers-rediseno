@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 VER = {n: hashlib.sha1((ROOT / "assets" / n).read_bytes()).hexdigest()[:8] for n in ("css/site.css", "js/site.js")}
 PHONE = "18632669575"
 FACEBOOK = "https://www.facebook.com/LaPatronaTrailersOFICIAL/"
+INSTAGRAM = "https://www.instagram.com/lapatronatrailers/"
 MAPS = "https://www.google.com/maps/search/?api=1&query=" + quote("2900 Titan Row, Suite 130, Orlando, FL 32817")
 
 ICONS = {
@@ -24,11 +25,13 @@ ICONS = {
     "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
     "pin": '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>',
     "clock": '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
-    "fb": '<path d="M14 21v-7.5h2.6l.4-3H14V8.6c0-.9.3-1.5 1.6-1.5H17V4.4a20 20 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.3H8.3v3H11V21"/>',
+    "ig": '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/>',
+    "fb": '<path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3.1Z"/>',
 }
 
 
 def icon(name, cls="icon", filled=False):
+    filled = filled or name == "fb"
     paint = 'fill="currentColor" stroke="none"' if filled else 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"'
     return f'<svg class="{cls}" viewBox="0 0 24 24" {paint} aria-hidden="true">{ICONS[name]}</svg>'
 
@@ -105,6 +108,7 @@ T = {
         "rev_h": "What our customers <em>say</em>",
         "rev_p": "Recommendations left by La Patrona customers on Facebook, shown as written.",
         "rev_meta": "Recommends La Patrona Trailers · Facebook · {date}",
+        "follow": "Follow us",
         "price": "Starting at", "price_note": "* Example prices, pending confirmation.",
         "fin_upto": "Financing up to", "fin_h": "Make your dream affordable.",
         "fin_p": "You don’t have to pay it all at once. Financing up to $30K is available. Ask about the options when you request your quote.",
@@ -193,6 +197,7 @@ T = {
         "rev_h": "Lo que dicen nuestros <em>clientes</em>",
         "rev_p": "Recomendaciones que nuestros clientes dejaron en Facebook, tal como las escribieron.",
         "rev_meta": "Recomienda La Patrona Trailers · Facebook · {date}",
+        "follow": "Síguenos",
         "price": "Desde", "price_note": "* Precios de ejemplo, por confirmar.",
         "fin_upto": "Financiamiento de hasta", "fin_h": "Haz tu sueño alcanzable.",
         "fin_p": "No tienes que pagarlo todo de una vez. Hay financiamiento de hasta $30K. Pregunta por las opciones cuando pidas tu cotización.",
@@ -508,6 +513,11 @@ def page(t):
             <li>{icon('pin')}<a href="{MAPS}" target="_blank" rel="noopener">2900 Titan Row, Suite 130<span>Orlando, FL 32817</span></a></li>
             <li>{icon('clock')}<div>{t['hours'][0][0]}<span>{t['hours'][0][1]}</span>{t['hours'][1][0]}<span>{t['hours'][1][1]}</span></div></li>
           </ul>
+          <div class="social" aria-label="{t['follow']}">
+            <span>{t['follow']}</span>
+            <a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{icon('fb')}</a>
+            <a href="{INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{icon('ig')}</a>
+          </div>
         </div>
         <form class="form" novalidate
           data-err-required="{t['err_req']}" data-err-email="{t['err_email']}" data-err-summary="{t['err_sum']}" data-ok="{t['ok']}"
@@ -553,7 +563,8 @@ def page(t):
           <li>2900 Titan Row, Suite 130, Orlando FL 32817</li>
           <li><a href="tel:+{PHONE}">+1 (863) 266-9575</a></li>
           <li><a href="mailto:lapatronatrailers@gmail.com">lapatronatrailers@gmail.com</a></li>
-          <li><a href="{FACEBOOK}" target="_blank" rel="noopener">Facebook</a></li>
+          <li class="social-links"><a href="{FACEBOOK}" target="_blank" rel="noopener">{icon('fb')} Facebook</a></li>
+          <li class="social-links"><a href="{INSTAGRAM}" target="_blank" rel="noopener">{icon('ig')} Instagram</a></li>
         </ul>
       </div>
     </div>
