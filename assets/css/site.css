@@ -309,6 +309,22 @@ html { scrollbar-color: #3a3833 var(--ink); }
 .quote p::after { content: "\201D"; color: var(--gold); }
 .quote footer { margin-top: 18px; color: var(--dim); font-size: 14px; }
 
+/* ---------- FAQ ---------- */
+.faq { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 110px); align-items: start; }
+.faq .lede { margin-top: 22px; }
+.faq-list { border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  padding: 24px 0; color: var(--bone); font-size: clamp(18px, 1.4vw, 21px); font-weight: 500; line-height: 1.35;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary .icon { width: 22px; height: 22px; color: var(--gold); transition: transform 0.35s var(--ease-out); }
+.faq-item[open] summary .icon { transform: rotate(45deg); }
+.faq-item summary:hover span { color: var(--gold); }
+.faq-item p { padding: 0 48px 26px 0; color: var(--bone-2); max-width: 62ch; }
+.faq-item[data-pending] p { color: var(--dim); font-style: italic; }
+
 /* ---------- CTA band ---------- */
 .cta-band { padding: clamp(80px, 11vw, 170px) var(--gutter); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; display: grid; justify-items: center; gap: 30px; position: relative; overflow: hidden; }
 .price { color: var(--gold); font-size: 15px; }
@@ -396,7 +412,7 @@ html { scrollbar-color: #3a3833 var(--ink); }
 @media (max-width: 1100px) {
   .nav { display: none; }
   .site-header { grid-template-columns: 1fr auto; }
-  .split-head, .about-grid, .reviews, .contact, .founder { grid-template-columns: 1fr; }
+  .split-head, .about-grid, .reviews, .contact, .founder, .faq { grid-template-columns: 1fr; }
   .split-head .lede { justify-self: start; }
   .founder-photo { position: static; }
   .footer-grid { grid-template-columns: 1fr 1fr; }

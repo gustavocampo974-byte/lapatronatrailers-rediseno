@@ -64,7 +64,7 @@ T = {
         "title": "La Patrona Trailers | Custom Food Trailers in Orlando, FL",
         "desc": "Customizable food trailers from 8×10 to 8×20 ft, designed and built in Orlando, Florida. Visit our facility and watch your trailer being built.",
         "skip": "Skip to content",
-        "nav": ["Trailers", "Custom", "About", "Our work", "Founder"],
+        "nav": ["Trailers", "Custom", "About", "Our work", "Founder", "FAQ"],
         "contact": "Contact", "quote": "Get a quote", "call": "Call La Patrona",
         "quote_url": "https://wa.link/mzfoe2",
         "hero_words": ("Food", "Trailers"),
@@ -109,6 +109,20 @@ T = {
         "rev_p": "Recommendations left by La Patrona customers on Facebook, shown as written.",
         "rev_meta": "Recommends La Patrona Trailers · Facebook · {date}",
         "follow": "Follow us",
+        "faq_h": "Questions & <em>answers</em>",
+        "faq_p": "What entrepreneurs ask us most before choosing their food trailer.",
+        "faq_pending": "Answer pending confirmation",
+        "faq": [
+            ("How much does a food trailer cost?", "Starting prices go from $12,000 for the 8×10 ft to $32,000 for the 8×20 ft (example prices, pending confirmation). The final price depends on the size, the kitchen equipment and the customization. Request a quote on WhatsApp for an exact number.", False),
+            ("What sizes do you build?", "We build 8×10, 8×12, 8×14, 8×16 and 8×20 ft food trailers, plus fully personalized builds designed around your business.", False),
+            ("Can I customize the layout and branding?", "Yes. We design and build each trailer around your needs, including size, branding, kitchen and other requirements. Customers help design their trailer layout to fit their exact needs.", False),
+            ("Can I see my trailer while it’s being built?", "Yes. Customers are welcome to visit our facility at 2900 Titan Row, Suite 130, Orlando, FL 32817, and see how their trailer is being built.", False),
+            ("How many people can work inside?", "It depends on the size: 1–2 people in the 8×10, 2 in the 8×12, 2–3 in the 8×14, 3–4 in the 8×16 and 4–5 in the 8×20.", False),
+            ("Do you offer financing?", "Yes. Financing up to $30K is available. Ask about the options and requirements when you request your quote.", False),
+            ("How long does it take to build a food trailer?", "", True),
+            ("Does the trailer include kitchen equipment?", "", True),
+            ("Do you deliver outside Florida?", "", True),
+        ],
         "price": "Starting at", "price_note": "* Example prices, pending confirmation.",
         "fin_upto": "Financing up to", "fin_h": "Make your dream affordable.",
         "fin_p": "You don’t have to pay it all at once. Financing up to $30K is available. Ask about the options when you request your quote.",
@@ -153,7 +167,7 @@ T = {
         "title": "La Patrona Trailers | Food trailers personalizados en Orlando, FL",
         "desc": "Remolques de comida personalizables de 8×10 a 8×20 pies, diseñados y construidos en Orlando, Florida. Visita nuestras instalaciones y mira cómo se construye tu trailer.",
         "skip": "Ir al contenido",
-        "nav": ["Trailers", "Personalizado", "Nosotros", "Trabajos", "Fundadora"],
+        "nav": ["Trailers", "Personalizado", "Nosotros", "Trabajos", "Fundadora", "FAQ"],
         "contact": "Contacto", "quote": "Cotizar", "call": "Llamar a La Patrona",
         "quote_url": wa("¡Hola! Quisiera recibir más información sobre los food trailers."),
         "hero_words": ("Food", "Trailers"),
@@ -198,6 +212,20 @@ T = {
         "rev_p": "Recomendaciones que nuestros clientes dejaron en Facebook, tal como las escribieron.",
         "rev_meta": "Recomienda La Patrona Trailers · Facebook · {date}",
         "follow": "Síguenos",
+        "faq_h": "Preguntas <em>frecuentes</em>",
+        "faq_p": "Lo que más nos preguntan los emprendedores antes de elegir su food trailer.",
+        "faq_pending": "Respuesta pendiente de confirmar",
+        "faq": [
+            ("¿Cuánto cuesta un food trailer?", "Los precios van desde $12,000 el de 8×10 pies hasta $32,000 el de 8×20 pies (precios de ejemplo, por confirmar). El precio final depende del tamaño, el equipo de cocina y la personalización. Pide tu cotización por WhatsApp para un número exacto.", False),
+            ("¿Qué tamaños fabrican?", "Fabricamos food trailers de 8×10, 8×12, 8×14, 8×16 y 8×20 pies, además de trailers totalmente personalizados según tu negocio.", False),
+            ("¿Puedo personalizar la distribución y la imagen?", "Sí. Diseñamos y construimos cada trailer según tus necesidades, incluyendo tamaño, marca, cocina y otros requisitos. Los clientes ayudan a diseñar la distribución de su trailer.", False),
+            ("¿Puedo ver mi trailer mientras lo construyen?", "Sí. Los clientes son bienvenidos a visitar nuestras instalaciones en 2900 Titan Row, Suite 130, Orlando, FL 32817, y ver cómo se construye su trailer.", False),
+            ("¿Cuántas personas pueden trabajar adentro?", "Depende del tamaño: 1 o 2 personas en el de 8×10, 2 en el de 8×12, 2–3 en el de 8×14, 3–4 en el de 8×16 y 4–5 en el de 8×20.", False),
+            ("¿Ofrecen financiamiento?", "Sí. Hay financiamiento de hasta $30K. Pregunta por las opciones y los requisitos cuando pidas tu cotización.", False),
+            ("¿Cuánto tiempo tarda la fabricación?", "", True),
+            ("¿El trailer incluye equipo de cocina?", "", True),
+            ("¿Hacen envíos fuera de Florida?", "", True),
+        ],
         "price": "Desde", "price_note": "* Precios de ejemplo, por confirmar.",
         "fin_upto": "Financiamiento de hasta", "fin_h": "Haz tu sueño alcanzable.",
         "fin_p": "No tienes que pagarlo todo de una vez. Hay financiamiento de hasta $30K. Pregunta por las opciones cuando pidas tu cotización.",
@@ -312,7 +340,14 @@ def page(t):
     founder_ps = "\n".join(f'          <p class="lede">{p}</p>' for p in t["founder_ps"])
     legal = "\n".join(f'            <li><a href="{t["legal_base"]}{u}">{n}</a></li>' for n, u in t["legal"])
     hours = "\n".join(f'            <li class="hours">{d}<span>{h}</span></li>' for d, h in t["hours"])
-    nav_ids = ["trailers", "custom", "about", "work", "founder"]
+    nav_ids = ["trailers", "custom", "about", "work", "founder", "faq"]
+    faq_html = "\n".join(
+        f'''          <details class="faq-item"{' data-pending' if pend else ''}>
+            <summary><span>{q}</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+            <p>{t['faq_pending'] if pend else a}</p>
+          </details>'''
+        for q, a, pend in t["faq"]
+    )
     nav = "\n".join(f'      <a class="btn" href="#{i}">{n}</a>' for i, n in zip(nav_ids, t["nav"]))
     f = t["f"]
 
@@ -476,6 +511,18 @@ def page(t):
             <p>{t['quote_text']}</p>
             <footer>{t['quote_foot']}</footer>
           </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-h">
+      <div class="faq">
+        <div>
+          <h2 class="display" id="faq-h">{t['faq_h']}</h2>
+          <p class="lede">{t['faq_p']}</p>
+        </div>
+        <div class="faq-list">
+{faq_html}
         </div>
       </div>
     </section>
